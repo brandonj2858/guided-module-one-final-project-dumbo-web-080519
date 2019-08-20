@@ -18,9 +18,20 @@ has_many :games, through: :bets
 
   def list_bets
     puts "These are the bets for #{self.name}"
-    self.bets.map do |bet|
+    user_bets = self.bets.map do |bet|
       bet
     end
+    puts "#{user_bets}"
+  end
+
+  def edit_bet_amount
+    user_bet = self.bets.map do |bet|
+      bet
+    end
+    edit_bet = TTY::Prompt.new.select("Choose a bet to edit", user_bet)
+    puts "How much would you like to bet?"
+    new_amount = gets.chomp
+    edit_bet.amount = new_amount
   end
 
 

@@ -22,14 +22,12 @@ attr_accessor :prompt, :user
     puts "Welcome #{self.user.name}!"
     self.prompt.select("What would you like to do today?") do |menu|
       menu.choice "See all bets", -> {self.user.list_bets}
-      menu.choice "Edit a bet", -> {}
+      menu.choice "Edit bet amount", -> {self.user.edit_bet_amount}
       menu.choice "Create new bet", -> {}
       menu.choice "Delete a bet", -> {}
     end
   end
 
-def choose_week
-  prompt.select("Choose a week", %w(Week 1, Week 2, Week 3))
-end
+
 
 end
