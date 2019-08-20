@@ -23,8 +23,9 @@ attr_accessor :prompt, :user
     self.prompt.select("What would you like to do today?") do |menu|
       menu.choice "See all bets", -> {self.user.list_bets}
       menu.choice "Edit bet amount", -> {self.user.edit_bet_amount}
-      menu.choice "Create new bet", -> {}
-      menu.choice "Delete a bet", -> {}
+      menu.choice "Create new bet", -> {self.user.create_new_bet}
+      menu.choice "Delete a bet", -> {self.user.delete_bet}
+      menu.choice "Close the app", -> {exit}
     end
   end
 
