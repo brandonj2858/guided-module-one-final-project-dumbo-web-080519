@@ -16,6 +16,13 @@ has_many :games, through: :bets
     User.create(name: name)
   end
 
+  def list_bets
+    puts "These are the bets for #{self.name}"
+    self.bets.map do |bet|
+      bet
+    end
+  end
+
 
 
 

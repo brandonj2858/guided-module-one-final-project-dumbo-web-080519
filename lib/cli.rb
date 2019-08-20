@@ -21,10 +21,11 @@ attr_accessor :prompt, :user
   def main_menu
     puts "Welcome #{self.user.name}!"
     self.prompt.select("What would you like to do today?") do |menu|
-      menu.choice "See all bets",
-      menu.choice "Edit a bet",
-      menu.choice "Create new bet",
-      menu.choice "Delete a bet"
+      menu.choice "See all bets", -> {self.user.list_bets}
+      menu.choice "Edit a bet", -> {}
+      menu.choice "Create new bet", -> {}
+      menu.choice "Delete a bet", -> {}
+    end
   end
 
 def choose_week
