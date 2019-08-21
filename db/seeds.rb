@@ -1,3 +1,4 @@
+
 brandon = User.create(name: "Brandon James")
 denzel = User.create(name: "Denzel Mclarty")
 
@@ -24,7 +25,7 @@ phivswas = Game.create(week_id: week1.id, name: "PHI -9 WAS", date: "9/8/2019")
 
 
 tbvscar = Game.create(week_id: week2.id, name: "TB +6 CAR", date: "9/12/2019")
-carvstb = Game.create(week_id: week2.id, name: "CAR -6 CAR", date: "9/12/2019")
+carvstb = Game.create(week_id: week2.id, name: "CAR -6 TB", date: "9/12/2019")
 sfvscin = Game.create(week_id: week2.id, name: "SF 0 CAR", date: "9/15/2019")
 cinvssf = Game.create(week_id: week2.id, name: "CAR 0 SF", date: "9/15/2019")
 detvslac = Game.create(week_id: week2.id, name: "DET +4 LAC", date: "9/15/2019")

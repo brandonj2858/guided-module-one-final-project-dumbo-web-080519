@@ -7,38 +7,45 @@ has_many :games, through: :bets
   def self.handle_returning_user
     puts "What is your First name Last name?"
     name = gets.chomp
-    User.find_by(name: name)
+    selected_user = User.find_by(name: name)
   end
 
   def self.handle_new_user
     puts "Welcome New User! Heres a quick rundown on how to read point spreads."
     puts "Example 1: 'GB -3.5 OAK' means GB must beat OAK by more than 3.5 points"
-    puts "Example 2: 'TB +4 NE' means TB must lose by less than 4 or win."
+    puts "Example 2: 'TB +4 NE' means TB must lose by less than 4 points or win."
     puts "What is your First name Last name?"
     name = gets.chomp
     User.create(name: name)
   end
 
   def list_bets
-    puts "These are the bets for #{self.name}."
-    user_bets = self.bets.map do |bet|
-      bet
+    user_bets = self.bets
+    if user_bets.empty?
+      puts "You do not have any bets placed."
+    else
+      user_bets.each do |bet|
+        puts "You have bet #{bet.amount} on #{bet.game.name}."
+      end
     end
-    user_bets.each do |bet|
-      puts "You have bet #{bet.amount} on #{bet.game.name}."
-    end
+    puts "\n"
   end
 
   def edit_bet_amount
     user_bet = self.bets.map do |bet|
       {(bet.game.name) => bet}
     end
-    edit_bet = TTY::Prompt.new.select("Choose a bet to edit", user_bet)
-    puts "How much would you like to bet?"
-    new_amount = gets.chomp
-    #binding.pry
-    edit_bet.update(amount: new_amount)
-    puts "Your bet has been updated to #{edit_bet.amount}"
+    if user_bet.empty?
+      puts "You have no bets"
+    else
+      edit_bet = TTY::Prompt.new.select("Choose a bet to edit", user_bet)
+      puts "How much would you like to bet?"
+      new_amount = gets.chomp
+      #binding.pry
+      edit_bet.update(amount: new_amount)
+      puts "Your bet has been updated to #{edit_bet.amount}"
+    end
+    puts "\n"
   end
 
   def create_new_bet
@@ -55,19 +62,25 @@ has_many :games, through: :bets
     found_game = Game.find_by(name: chosen_game)
     puts "How much would you like to bet?"
     amount_bet = gets.chomp
-    Bet.create(user_id: self.id, game_id: found_game.id, amount: amount_bet)
-    puts "Congratulations your bet has been created!"
+    new_bet = Bet.create(user_id: self.id, game_id: found_game.id, amount: amount_bet)
+    puts "Congratulations your bet has been created! Your bet I.D is #{new_bet.id}"
+    puts "\n"
   end
 
   def delete_bet
     user_bets = self.bets.map do |bet|
       {(bet.game.name) => bet.id}
     end
-    selection = TTY::Prompt.new.select("Which bet would you like to delete?", user_bets)
-    #binding.pry
-    self.bets.delete(selection)
-    puts "Your bet has been deleted!"
-  end
+      if user_bets.empty?
+        puts "How can you delete bets that you dont have?"
+      else
+        selection = TTY::Prompt.new.select("Which bet would you like to delete?", user_bets)
+        #binding.pry
+        self.bets.delete(selection)
+        puts "Your bet has been deleted!"
+      end
+      puts "\n"
+    end
 
 
 end

@@ -7,7 +7,7 @@ attr_accessor :prompt, :user
 
 
   def greeting
-    puts "Hello welcome to the NFL betting app. Taking care of all your gambling needs"
+    puts "Hello welcome to the NFL betting app. Taking care of all your betting needs"
   end
 
   def new_or_returning
@@ -19,6 +19,7 @@ attr_accessor :prompt, :user
 
 
   def main_menu
+    user.reload
     puts "Welcome #{self.user.name}!"
     self.prompt.select("What would you like to do today?") do |menu|
       menu.choice "See all bets", -> {self.user.list_bets}
