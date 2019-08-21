@@ -42,3 +42,5 @@ Read ahead for detailed instructions as to how to use the application.
 
 
 <p class='util--hide'>View <a href='https://github.com/brandonj2858/guided-module-one-final-project-dumbo-web-080519/blob/master/LICENSE.md'>License</a></p>
+
+<p class='util--hide'>View <a href='https://github.com/brandonj2858/guided-module-one-final-project-dumbo-web-080519/blob/master/CONTRIBUTING.md'>Contributing</a></p>
